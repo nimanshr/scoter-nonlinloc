@@ -1,0 +1,127 @@
+#
+# NLLoc program control file.
+#
+# The following parameters are quite optimal values for locating events
+# with N<=30 phases recorded at the distance range of <=21 degrees (e.g.
+# regional stations).
+#
+# Written by Nima Nooshiri
+# Last modification: 21-06-2017
+# ----------------------------------------------------------------------
+
+INCLUDE ../meta/stations-complete-ehb.nll
+INCLUDE ../meta/stations-additional-ehb.nll
+
+CONTROL 0 54321
+
+TRANS GLOBAL
+
+LOCSIG GFZ Potsdam
+
+LOCFILES ../data_regional_picks/*.nll NLLOC_OBS ../time/taup/ak135/ak135 ./loc/TEST 1
+
+LOCHYPOUT  SAVE_NLLOC_ALL
+
+LOCGRID  361 181 701  -180.0 -90.0 0.0  1.0 1.0 10.0  PROB_DENSITY SAVE
+
+LOCSEARCH  OCT  96 48 7  0.01  96758  10000  0  1
+
+LOCMETH  EDT_OT_WT  99999.9 8 30 -1 -1.7 -1 -1.0 1
+
+LOCGAU 0.5 0.0
+
+LOCGAU2 0.01 0.05  2.0
+
+LOCPHASEID P  P Pg Pb Pn
+LOCPHASEID pP  pP pwP
+
+LOCQUAL2ERR 1.0 1.0 1.0 1.0 999999.9
+
+LOCELEVCORR 1 5.8 3.46
+
+LOCSTAWT 1 -1.0
+
+# ----------------------------------------------------------------------
+#
+# Description of some of the above keywords and parameters:
+#
+## LOCSEARCH - search type
+#   <initNumCells_x> <initNumCells_y> <initNumCells_z> (int)
+#       Initial number of octtree cells in the x, y, and z directions.
+#   <minNodeSize> (float)
+#       Smallest octtree node side length to process. Tthe octree search
+#       is terminated after a node with a side smaller than this length
+#       is generated.
+#   <maxNumNodes> (int)
+#       Total number of nodes to process.
+#   <numScatter> (int)
+#       The number of scatter samples to draw from the octtree results.
+#   <useStationsDensity> (int, >=0, default:0)
+#       Flag, if >=1 weights oct-tree cell probability values used for
+#       subdivide decision in proportion to number of stations in
+#       oct-tree cell; gives higher search priority to cells containing
+#       stations, stablises convergence to local events when global
+#       search used with dense cluster of local stations (NOTE: different
+#       results are obtained for different values that are >= 1).
+#   <stopOnMinNodeSize> (int, min:0, max:1, default:1)
+#       Flag, if 1 stops search when first minNodeSize reached, if 0 stop
+#       subdividing a given cell when minNodeSize reached.
+#
+#
+## LOCMETH - location method
+#   <method> str
+#       EDT_OT_WT = Weights EDT-sum probabilities by the variance of the
+#       origin-time estimates over all pairs of readings. This reduces
+#       the probability (PDF values) at points with inconsistent OT
+#       estimates, and leads to more compact location PDFs.
+#   <maxDistStaGrid> (float)
+#       Maximum distance in km between a station and the center of the
+#       initial search grid. Phases from stations beyond this distance
+#       will not be used for event location. Use very large value for
+#       no max.
+#   <minNumberPhases> (int)
+#       Minimum number of phases that must be accepted before event will
+#       be located.
+#   <maxNumberPhases> (int)
+#       Maximum number of accepted phases that will be used for event
+#       location. Only the first maxNumberPhases read from the phase or
+#       observations file are used for location. Use -1 for no max.
+#   <minNumberSphases> (int)
+#       Minimum number of S phases that must be accepted before event
+#       will be located. Use -1 for no min.
+#   <VpVsRatio> (float)
+#       Vp/Vs ratio. If >= 0.0 then only P phase travel-times grids are
+#       read and the ratio is used to calculate S phase travel-times.
+#       If < 0.0 then S phase travel-times grids are used.
+#   <maxNum3DGridMemory> (int)
+#       Maximum number of 3D travel-time grids to attempt to read into
+#       memory for Metropolis-Gibbs search. If < 0 then NLLoc attempts
+#       to read all grids into memory.
+#   <minDistStaGrid> (float)
+#       Minimum distance in km between a station and the center of the
+#       initial search grid. Phases from stations closer than this
+#       distance will not be used for event location. Use -1 for no max.
+#   <duplicatePhase> (int, min:0, max:1)
+#       Flag indicating if duplicate arrivals used for location
+#       (1=reject, 0=use if time difference < sigma/2).
+#       Duplicate arrivals have same station label and phase name.
+#
+#
+## LOCELEVCORR - simple, vertical ray elevation correction
+#   <flag> (int, min:0, max:1, default:0)
+#       Flag to set activation of elevation correction (0=NO, 1=Yes).
+#   <Vp> (float)
+#       P velocity to use for calculation of the elevation correction
+#       for P type phases (last leg of phase is P or p).
+#   <Vs> (float)
+#       S velocity to use for calculation of the elevation correction
+#       for S type phases (last leg of phase is S or s).
+#
+#
+## LOCSTAWT - station distribution weighting
+#   <flag> (int, min:0, max:1, default:0)
+#       Whether to apply station distribution weighting (0=NO, 1=YES).
+#   <cutoffDist> (float)
+#       Cutoff distance for weighting calculation. cutoffDist < 0.0 sets
+#       automatic cutoff distance equal to the mean distance between all
+#       pairs of stations used for location.
