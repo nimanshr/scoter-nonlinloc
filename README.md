@@ -2,8 +2,7 @@
 
 Probabilistic, Non-Linear, Global-Search Earthquake Location in 3D Media
 
-The NonLinLoc software is developed and maintained by:
-
+The NonLinLoc software is developed and maintained by:   
 [Anthony Lomax](Anthony Lomax) - [ALomax Scientific, Mouans-Sartoux, France](http://alomax.free.fr/alss/)
 
 See [NonLinLoc homepage](http://alomax.free.fr/nlloc/) for an online guide to software.
