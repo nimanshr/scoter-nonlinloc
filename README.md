@@ -14,7 +14,7 @@ Use `git` to download the software package to install:
 
 ```
 cd ~/src/   # or wherever you keep your source packages
-git clone git@gitlab.com:nimanshr/stater-nonlinloc.git
+git clone https://gitlab.com/nimanshr/stater-nonlinloc.git
 cd stater-nonlinloc/src
 sudo make -R all
 ```
