@@ -8,11 +8,11 @@ The NonLinLoc software is developed and maintained by:
 See [NonLinLoc homepage](http://alomax.free.fr/nlloc/) for an online guide to software.
 
 
-## Download and install
+## Download and installation
 
 Use `git` to download the software package to install:
 
-```
+```bash
 cd ~/src/   # or wherever you keep your source packages
 git clone https://gitlab.com/nimanshr/scoter-nonlinloc.git
 cd scoter-nonlinloc
