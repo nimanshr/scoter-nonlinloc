@@ -14,7 +14,7 @@ Use `git` to download the software package to install:
 
 ```bash
 cd ~/src/   # or wherever you keep your source packages
-git clone https://gitlab.com/nimanshr/scoter-nonlinloc.git
+git clone https://gitext.gfz-potsdam.de/nooshiri/scoter-nonlinloc.git
 cd scoter-nonlinloc
 cd src
 sudo make -R all
